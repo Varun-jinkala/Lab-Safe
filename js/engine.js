@@ -1,0 +1,11 @@
+/* Simulation engine: shared per-experiment state, log, ui sync, animation loop. */
+let S=null,SS={},last=0,sc,gc;
+function say(m){S.log.unshift(`[${S.t.toFixed(1)} s] ${m}`);S.log.length=Math.min(S.log.length,60);S.dirty=1;$('#msg').textContent=''}
+function warn(m){$('#msg').textContent='Warning: '+m;snd.click()}
+function mk(id){const e=EX[id],S={id,e,t:0,run:true,done:false,data:[],log:[],dirty:1,s:e.init()};S.ctl=e.ctl(S);return S}
+function open(id,fresh){S=!fresh&&SS[id]?SS[id]:(SS[id]=mk(id));const e=S.e;go('lab');$('#ttl').textContent=e.title;$('#quiz').hidden=true;$('#pz').textContent=S.run?'Pause':'Resume';
+$('#info').innerHTML=`<h3>Experiment panel</h3><details open><summary>Objective</summary>${e.obj}</details><details><summary>Background and equation</summary>${e.bg}</details><details><summary>Apparatus and materials</summary>${e.app}</details><details open><summary>Safety</summary>${e.saf}</details><details open><summary>Procedure</summary><ol>${e.steps.map(x=>`<li>${x}</li>`).join('')}</ol></details><details><summary>Model assumptions</summary>${e.model}</details>`;
+$('#ctl').innerHTML='';S.ctl.forEach(([l,f])=>{const b=document.createElement('button');b.textContent=l;b.onclick=()=>{if(!S.run)return warn('Simulation is paused – resume to operate equipment.');f();S.dirty=1};$('#ctl').append(b)});
+$('#thead').innerHTML=e.cols.map(c=>`<th>${c}</th>`).join('');if(!S.log.length)say('Experiment loaded. Expected observations are in the panel; actual readings appear here.')}
+function ui(){const e=S.e;$('#tbody').innerHTML=S.data.map(r=>`<tr>${r.map(v=>`<td>${v}</td>`).join('')}</tr>`).join('');$('#log').innerHTML=S.log.map(l=>`<li>${l}</li>`).join('');$('#res').textContent=e.res(S);$('#qbtn').disabled=!S.done;$('#qbtn').textContent=S.done?'Take quiz':'Take quiz (unlocks on completion)'}
+function frame(ts){const dt=Math.min((ts-last)/1e3,.05);last=ts;if(S&&!$('#lab').hidden){if(S.run){S.t+=dt;S.e.step(S,dt)}S.e.draw(sc.getContext('2d'),S);plot(gc,S.e.graph(S));$('#clock').textContent=`Simulation time ${S.t.toFixed(1)} s${S.run?'':' (paused)'}`;if(S.dirty){S.dirty=0;if(!S.done&&S.e.chk(S)){S.done=true;say('Completion condition met – quiz unlocked.');snd.ok()}ui()}}requestAnimationFrame(frame)}

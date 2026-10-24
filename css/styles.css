@@ -1,0 +1,14 @@
+:root{--bg:#f1f5f8;--fg:#13202b;--card:#fff;--mut:#51626f;--ac:#0b6e69;--bd:#cfd8df;--warn:#b42318;--ok:#13795b;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1720;--fg:#e6edf3;--card:#16232e;--mut:#a3b3c1;--ac:#4cd0c4;--bd:#2b3b49;--warn:#ff8f85;--ok:#5fd4a8;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1720;--fg:#e6edf3;--card:#16232e;--mut:#a3b3c1;--ac:#4cd0c4;--bd:#2b3b49;--warn:#ff8f85;--ok:#5fd4a8;color-scheme:dark}
+*{box-sizing:inherit}html,body{height:auto}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:1200px;margin:0 auto;padding:16px}h1{font-size:clamp(1.8rem,5vw,3rem);margin:.2em 0}h2,h3{margin:.4em 0}
+button{font:inherit;background:var(--ac);color:#fff;border:0;border-radius:8px;padding:9px 14px;cursor:pointer;min-height:40px}:root:not([data-theme="light"]) button{color:#06201e}
+button.g{background:transparent;color:var(--fg);border:1px solid var(--bd)}button:disabled{opacity:.45;cursor:not-allowed}button:focus-visible,input:focus-visible{outline:3px solid #f5a524;outline-offset:2px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px;min-width:0}
+.hero{padding:28px 0}.mut{color:var(--mut)}canvas{width:100%;height:auto;display:block;border-radius:8px;border:1px solid var(--bd);background:#fff}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}.bar .sp{flex:1}.btns{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+#msg{min-height:1.5em;color:var(--warn);font-weight:600}.tw{max-height:170px;overflow:auto}table{border-collapse:collapse;width:100%;font-size:.9rem}th,td{border-bottom:1px solid var(--bd);padding:3px 6px;text-align:left}
+ul.l{list-style:none;padding:0;margin:0;max-height:150px;overflow:auto;font-size:.88rem}details{margin:6px 0}summary{cursor:pointer;font-weight:600}
+fieldset{border:1px solid var(--bd);border-radius:8px;margin:8px 0}label{display:block;padding:3px 0}.ex{color:var(--mut);margin:4px 0}.good{color:var(--ok)}.bad{color:var(--warn)}
+.big{font-size:2rem;font-weight:700}.tag{font-size:.8rem;border:1px solid var(--bd);border-radius:20px;padding:1px 8px;color:var(--mut)}

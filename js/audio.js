@@ -1,0 +1,4 @@
+/* Web Audio synthesis: equipment sounds are generated, no audio files needed. */
+let AC,vol=.6,mute=false;
+function tone(f,d,ty='sine',g=.3,sl){if(mute)return;try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();if(AC.state=='suspended')AC.resume();const o=AC.createOscillator(),n=AC.createGain(),t=AC.currentTime;o.type=ty;o.frequency.setValueAtTime(f,t);if(sl)o.frequency.exponentialRampToValueAtTime(sl,t+d);n.gain.setValueAtTime(Math.max(g*vol,.0002),t);n.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(n);n.connect(AC.destination);o.start(t);o.stop(t+d)}catch(e){}}
+const snd={click:()=>tone(1800,.04,'square',.1),clink:m=>[2400,3700,5100].forEach((f,i)=>tone(f/(1+m*.6),.6/(i+1)+.1,'sine',.18/(i+1))),drip:()=>tone(950,.12,'sine',.25,320),beep:()=>tone(1000,.14,'square',.09),ok:()=>{tone(660,.12);setTimeout(()=>tone(880,.2),130)}};
