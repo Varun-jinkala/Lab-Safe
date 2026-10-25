@@ -2,10 +2,15 @@
 
 An interactive browser-based educational lab with Chemistry, Physics and Biology experiments. Each experiment runs on one shared simulation state, so the animation, instrument readings, live graph, data table, observation log, results and quiz all use the same data.
 
-## Run it
-No build step and no server needed: open `index.html` in a modern browser (Chrome, Edge, Firefox, Safari).
-Optional local server: `python3 -m http.server 8000` then visit http://localhost:8000.
-Run model tests (Node 18+, no dependencies): `node tests/models.test.js`
+## 🚀 Live Demo
+
+Experience the Virtual Science Laboratory directly in your browser:
+
+🔗 **Live Website:** https://lab-safe-8hfilugll-varunprojects10.vercel.app/
+
+Explore interactive Chemistry, Physics, and Biology experiments with real-time simulations, dynamic graphs, observation logs, instrument readings, and automated quizzes.
+
+No installation required — open the link and start exploring!
 
 ## Project structure
 ```
